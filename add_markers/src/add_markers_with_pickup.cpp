@@ -127,6 +127,8 @@ int main( int argc, char** argv )
       y_distance = fabs(marker.pose.position.y - odom_y);
       radius = sqrt(pow(x_distance, 2) + pow(x_distance, 2));
       if( (x_distance < tolerance) && (y_distance < tolerance) ){
+        ROS_INFO("Picking Up Marker");
+        ros::Duration(5.0).sleep();
         marker.action = visualization_msgs::Marker::DELETE;
         marker_pub.publish(marker);
         ROS_INFO("Pick Up Done");
@@ -149,6 +151,7 @@ int main( int argc, char** argv )
 
         marker_pub.publish(marker);
         ROS_INFO("Drop Off Marker at [%f], [%f], [%f]", goals[1][0], goals[1][1], goals[1][2]);
+        ros::Duration(5.0).sleep();
 
       }
     }
@@ -157,15 +160,5 @@ int main( int argc, char** argv )
 
   r.sleep();
   }
-
-  ros::Duration(5.0).sleep();
-  
-  marker.pose.position.x = goals[1][0];
-  marker.pose.position.y = goals[1][1];
-  marker.pose.position.z = 0.5;
-  marker.pose.orientation = tf::createQuaternionMsgFromYaw(goals[1][2]);
-  marker.action = visualization_msgs::Marker::ADD;
-  marker_pub.publish(marker);
  
-  r.sleep();
 }
