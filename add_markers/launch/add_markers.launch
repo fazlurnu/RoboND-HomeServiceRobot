@@ -2,7 +2,7 @@
 
   <!-- Launch ROS Package Template Node -->
   <node pkg="add_markers" type="add_markers" name="add_markers" output="screen">
-    <rosparam command="load" file="$(find pick_objects)/param/param.yaml"/>
+    <rosparam command="load" file="$(find add_markers)/param/param.yaml"/>
   </node>
 
 </launch>
