@@ -53,6 +53,11 @@ int main(int argc, char** argv){
 		ros::requestShutdown();
 	}
 
+  // Define a position and orientation for the robot to reach
+  int nb_goals = 2;
+  int nb_states = 3; // state: x, y, w
+  float goals[nb_goals][nb_states] = { {pick_up_x, pick_up_y, pick_up_w}, {drop_off_x, drop_off_y, drop_off_w}  };
+  
   //tell the action client that we want to spin a thread by default
   MoveBaseClient ac("move_base", true);
 
@@ -66,11 +71,6 @@ int main(int argc, char** argv){
   // set up the frame parameters
   goal.target_pose.header.frame_id = "map";
   goal.target_pose.header.stamp = ros::Time::now();
-
-  // Define a position and orientation for the robot to reach
-  int nb_goals = 2;
-  int nb_states = 3; // state: x, y, w
-  float goals[nb_goals][nb_states] = { {pick_up_x, pick_up_y, pick_up_w}, {drop_off_x, drop_off_y, drop_off_w}  };
 
   for (int i=0; i < nb_goals; i++){
 
