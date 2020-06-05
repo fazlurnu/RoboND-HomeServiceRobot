@@ -12,7 +12,7 @@ sleep 5
 xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch add_markers view_navigation.launch" &
 sleep 5
 
-xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch add_markers add_markers_with_pickup.launch" &
+xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch add_markers add_markers.launch" &
 sleep 5
 
 xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch pick_objects pick_objects.launch" &

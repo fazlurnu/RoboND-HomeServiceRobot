@@ -1,7 +1,7 @@
 <launch>
 
   <!-- Launch ROS Package Template Node -->
-  <node pkg="add_markers" type="add_markers" name="add_markers" output="screen">
+  <node pkg="add_markers" type="add_markers_with_pickup" name="add_markers_with_pickup" output="screen">
     <rosparam command="load" file="$(find add_markers)/param/param.yaml"/>
   </node>
 

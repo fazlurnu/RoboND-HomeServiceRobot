@@ -2,28 +2,6 @@
 #include <visualization_msgs/Marker.h>
 #include <tf/tf.h>
 
-bool readParameters(ros::NodeHandle nodeHandle, float& pick_up_x, float& pick_up_y, float& pick_up_w, float& drop_off_x, float& drop_off_y, float& drop_off_w){
-	if(!nodeHandle.getParam("/add_markers/pick_up_x", pick_up_x)){
-		return false;
-	}
-	if(!nodeHandle.getParam("/add_markers/pick_up_y", pick_up_y)){
-		return false;
-	}
-	if(!nodeHandle.getParam("/add_markers/pick_up_w", pick_up_w)){
-		return false;
-	}
-	if(!nodeHandle.getParam("/add_markers/drop_off_x", drop_off_x)){
-		return false;
-	}
-	if(!nodeHandle.getParam("/add_markers/drop_off_y", drop_off_y)){
-		return false;
-	}
-	if(!nodeHandle.getParam("/add_markers/drop_off_w", drop_off_w)){
-		return false;
-	}
-	return true;
-}
-
 int main( int argc, char** argv )
 {
   ros::init(argc, argv, "add_markers");
@@ -32,17 +10,12 @@ int main( int argc, char** argv )
   ros::Rate r(1);
   ros::Publisher marker_pub = nodeHandle.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
-  float pick_up_x = 0.0;
-  float pick_up_y = 0.0;
+  float pick_up_x = -2.5;
+  float pick_up_y = 3.0;
   float pick_up_w = 0.0;
-  float drop_off_x = 1.0;
-  float drop_off_y = 1.0;
-  float drop_off_w = 1.0;
-
-  if (!readParameters(nodeHandle, pick_up_x, pick_up_y, pick_up_w, drop_off_x, drop_off_y, drop_off_w)){
-		ROS_ERROR("Could not read params.");
-		ros::requestShutdown();
-	}
+  float drop_off_x = 2.5;
+  float drop_off_y = -3.0;
+  float drop_off_w = 1.5707;
 
   // Define a position and orientation for the robot to reach
   int nb_goals = 2;
