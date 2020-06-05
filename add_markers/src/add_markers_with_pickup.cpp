@@ -122,11 +122,14 @@ int main( int argc, char** argv )
 
     if (!object_is_picked){
       marker_pub.publish(marker);
-      ROS_INFO("Pick Up Marker at [%f], [%f], [%f]", goals[0][0], goals[0][1], goals[0][2]);
+      
       x_distance = fabs(marker.pose.position.x - odom_x);
       y_distance = fabs(marker.pose.position.y - odom_y);
       radius = sqrt(pow(x_distance, 2) + pow(x_distance, 2));
-      if( (x_distance < tolerance) && (y_distance < tolerance) ){
+
+      ROS_INFO("Distance to pikc up marker: [%f]", radius);
+
+      if( radius < tolerance ){
         ROS_INFO("Picking Up Marker");
         ros::Duration(5.0).sleep();
         marker.action = visualization_msgs::Marker::DELETE;
