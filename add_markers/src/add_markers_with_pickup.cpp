@@ -46,7 +46,7 @@ int main( int argc, char** argv )
   ros::Rate r(1);
 
   ros::Publisher marker_pub = nodeHandle.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  ros::Subscriber odometry_sub = n.subscribe("/odom", 10, odomCallback);
+  ros::Subscriber odometry_sub = nodeHandle.subscribe("/odom", 10, odomCallback);
 
   float pick_up_x = 0.0;
   float pick_up_y = 0.0;
