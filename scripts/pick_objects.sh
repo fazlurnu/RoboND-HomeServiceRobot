@@ -14,4 +14,4 @@ xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch turtlebot
 
 sleep 5
 
-xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && rosrun pick_objects pick_objects" &
+xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch pick_objects pick_objects.launch" &
