@@ -1,23 +1,24 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
+#include <tf/tf.h>
 
 bool readParameters(ros::NodeHandle nodeHandle, float& pick_up_x, float& pick_up_y, float& pick_up_w, float& drop_off_x, float& drop_off_y, float& drop_off_w){
-	if(!nodeHandle.getParam("/pick_objects/pick_up_x", pick_up_x)){
+	if(!nodeHandle.getParam("/add_markers/pick_up_x", pick_up_x)){
 		return false;
 	}
-	if(!nodeHandle.getParam("/pick_objects/pick_up_y", pick_up_y)){
+	if(!nodeHandle.getParam("/add_markers/pick_up_y", pick_up_y)){
 		return false;
 	}
-	if(!nodeHandle.getParam("/pick_objects/pick_up_w", pick_up_w)){
+	if(!nodeHandle.getParam("/add_markers/pick_up_w", pick_up_w)){
 		return false;
 	}
-	if(!nodeHandle.getParam("/pick_objects/drop_off_x", drop_off_x)){
+	if(!nodeHandle.getParam("/add_markers/drop_off_x", drop_off_x)){
 		return false;
 	}
-	if(!nodeHandle.getParam("/pick_objects/drop_off_y", drop_off_y)){
+	if(!nodeHandle.getParam("/add_markers/drop_off_y", drop_off_y)){
 		return false;
 	}
-	if(!nodeHandle.getParam("/pick_objects/drop_off_w", drop_off_w)){
+	if(!nodeHandle.getParam("/add_markers/drop_off_w", drop_off_w)){
 		return false;
 	}
 	return true;
@@ -29,7 +30,7 @@ int main( int argc, char** argv )
 
   ros::NodeHandle nodeHandle("~");
   ros::Rate r(1);
-  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  ros::Publisher marker_pub = nodeHandle.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
   float pick_up_x = 0.0;
   float pick_up_y = 0.0;
@@ -90,14 +91,13 @@ int main( int argc, char** argv )
   while (marker_pub.getNumSubscribers() < 1){
     if (!ros::ok()){
       return 0;
->>>>>>> 7eccdf5f1a71bbdaa00f87d4e1f07aa39f472d61
     }
     ROS_WARN_ONCE("Please create a subscriber to the marker");
     sleep(1);
   }
 
   marker_pub.publish(marker);
-  ROS_INFO("Pick Up Marker");
+  ROS_INFO("Pick Up Marker at [%f], [%f], [%f]", goals[0][0], goals[0][1], goals[0][2]);
   
   ros::Duration(5.0).sleep();
 
@@ -113,8 +113,7 @@ int main( int argc, char** argv )
   marker.pose.orientation = tf::createQuaternionMsgFromYaw(goals[1][2]);
   marker.action = visualization_msgs::Marker::ADD;
   marker_pub.publish(marker);
-  ROS_INFO("Drop Off Marker");
+  ROS_INFO("Drop Off Marker at [%f], [%f], [%f]", goals[1][0], goals[1][1], goals[1][2]);
  
   r.sleep();
-  }
 }
