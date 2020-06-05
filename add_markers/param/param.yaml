@@ -1,0 +1,7 @@
+pick_up_x : -2.5
+pick_up_y : 3.0
+pick_up_w : 0.0
+drop_off_x : 2.5
+drop_off_y : -3
+drop_off_w : 1.5707
+distance_tolerance : 0.25
