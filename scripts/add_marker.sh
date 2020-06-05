@@ -14,4 +14,4 @@ xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch turtlebot
 
 sleep 5
 
-xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && roslaunch add_markers add_markers.launch" &
+xterm -e "cd ${path_catkin_ws} && source devel/setup.bash && rosrun add_markers add_markers" &
